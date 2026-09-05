@@ -1,0 +1,139 @@
+import random
+import keyboard
+
+stert = 0
+random_monster = 0
+monster_list = {
+    '용암 슬라임' : (2,3,2),
+    '붉은 드레곤' : (1,1,3),
+    '칼날늑대': (1,2,3),
+    '차원 강아지',(3,3,2)
+    '강철 골램',(1,3,2)
+    '점토 병사',(1,3,1)
+    }
+
+moster = ''
+unit = 1 #부대 종류 (1 : 군대,2 : 마법사,3 : 전략가)
+many = 2 #많고, 적음 (1 : 소,2 : 중,3 : 대)
+s_y = 1 #전략(stacstrategy), (1 : 공격적,2 : 수비적,3 : 탐구적)
+sistem = 1 #설정 대상 (1 : 부대 종류,2 : 많고,적음,3 : 전략)
+
+print('당신은 평범하지 않지않지아니하지아니하지않은 회사에서')
+print('특별 않지않지아니하지아니한 일을 하는 사람 입니다.')
+print('여기서 당신은 합리적이고,지니어스하고,객관적이고,스마트한 선택을 내리세요')
+print('(위 화살표로 시작)')
+
+def r_up(event):
+    global unit
+    global many
+    global s_y
+    if stert == 1:
+        if sistem == 1:
+            if unit == 3:
+                unit = 1
+            else:
+                unit += 1
+            print('현재 부대 :')
+            if unit == 1:
+                print('군대')
+            elif unit == 2:
+                print('마법사')
+            else:
+                print('전략가')
+        elif sistem == 2:
+            if many == 3:
+                many = 1
+            else:
+                many += 1
+            print('현재 전력 :')
+            if many == 1:
+                print('소')
+            elif many == 2:
+                print('중')
+            else:
+                print('대')
+        else:
+            if s_y == 3:
+                s_y = 1
+            else:
+                s_y += 1
+            print('현재 전략 :')
+            if s_y == 1:
+                print('공격적')
+            elif s_y == 2:
+                print('수비적')
+            else:
+                print('탐구적')
+    else:
+        pass
+
+def l_down(event):
+    global unit
+    global many
+    global s_y
+    if stert == 1:
+        if sistem == 1:
+            if unit == 1:
+                unit = 3
+            else:
+                unit -= 1
+            print('현재 부대 :')
+            if unit == 1:
+                print('군대')
+            elif unit == 2:
+                print('마법사')
+            else:
+                print('전략가')
+        elif sistem == 2:
+            if many == 1:
+                many = 3
+            else:
+                many -= 1
+            print('현재 전력 :')
+            if many == 1:
+                print('소')
+            elif many == 2:
+                print('중')
+            else:
+                print('대')
+        else:
+            if s_y == 1:
+                s_y = 3
+            else:
+                s_y -= 1
+            print('현재 전략 :')
+            if s_y == 1:
+                print('공격적')
+            elif s_y == 2:
+                print('수비적')
+            else:
+                print('탐구적')
+    else:
+        pass
+
+def u_system(event):
+    global stert, sistem
+    if stert == 1:
+        if sistem == 3:
+            sistem = 1
+        else:
+            sistem += 1
+    else:
+        global random_monster
+        random_monster = random.choice(list(monster_list.items()))
+
+        stert = 1
+        print('플레이 방법 : (위 화살표 : 부대의 종류,병력 수,전략을 선택)\n(오른쪽 화살표 : 다음 선택)\n(왼쪽 화살표 : 이전 선택)\n(아래 화살표 : 전략 개시!)\n미션을 보고 해결 하세요,모든 선택지를 보시고 고르는걸 추천 드립니다.')
+
+def d_dayend(event):
+    if stert == 1:
+        print('')
+    else:
+        pass
+
+keyboard.on_press_key("Right", r_up)
+keyboard.on_press_key("Left", l_down)
+keyboard.on_press_key("Up", u_system)
+keyboard.on_press_key("Down", d_dayend)
+
+keyboard.wait()
