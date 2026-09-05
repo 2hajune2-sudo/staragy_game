@@ -120,7 +120,9 @@ def u_system(event):
             sistem += 1
     else:
         global random_monster
-        random_monster = random.choice(list(monster_list.items()))
+        name, stats = random.choice(list(monster_list.items()))
+
+       
 
         stert = 1
         print('플레이 방법 : (위 화살표 : 부대의 종류,병력 수,전략을 선택)\n(오른쪽 화살표 : 다음 선택)\n(왼쪽 화살표 : 이전 선택)\n(아래 화살표 : 전략 개시!)\n미션을 보고 해결 하세요,모든 선택지를 보시고 고르는걸 추천 드립니다.')
